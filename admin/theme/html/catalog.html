@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ name }}</h1>
+<div class="row">
+    <div class="col-lg-12" style="margin-bottom: 20px">
+        <a class="btn btn-primary" href="/admin/product/"><span class="glyphicon glyphicon-plus"></span> Добавить товар</a>
+    </div>
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name Product</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Descripton</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for product in products %}
+        <tr>
+            <td><img class="img-circle" style="width: 100px; height: auto " src="/uploads/image/{{ product.image }}" alt=""></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+        </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
