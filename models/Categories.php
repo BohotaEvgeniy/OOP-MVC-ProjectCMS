@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Evil Genius
- * Date: 02.11.2017
- * Time: 22:54
- */
 
 class Categories extends Database
 {
@@ -37,6 +31,15 @@ class Categories extends Database
             return false;
         }
         $query = "SELECT id,name, visible,image FROM categories WHERE id = $id LIMIT 1";
+        $this->query($query);
+        return $this->result();
+    }
+    public function getCategoryId($name)
+    {
+        if(empty($name)) {
+            return false;
+        }
+        $query = "SELECT id FROM categories WHERE `name` LIKE '%$name%'";
         $this->query($query);
         return $this->result();
     }

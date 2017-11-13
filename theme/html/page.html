@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+
+    <img>{{ page_whole.image }}</img>
+    <h5>{{ page_whole.name }}</h5>
+
+{% endblock %}
+
+{% block description %}
+    <div class="col-lg-12">
+        <p>{{ page_whole.description }}</p>
+    </div>
+{% endblock %}
+
+{% block navigation %}
+
+    {% for page in pages %}
+
+        <li><a href="{{ page.url }}" >{{ page.name }}</a></li>
+
+    {% endfor %}
+
+{% endblock %}

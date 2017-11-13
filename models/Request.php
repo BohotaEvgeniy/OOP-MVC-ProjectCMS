@@ -77,26 +77,39 @@ class Request
      */
     public function uploadImgFile($name)
     {
+        function transliterate($st) {
+            $st = strtr($st,
+                "абвгдежзийклмнопрстуфыэАБВГДЕЖЗИЙКЛМНОПРСТУФЫЭ",
+                "abvgdegziyklmnoprstufieABVGDEGZIYKLMNOPRSTUFIE"
+            );
+            $st = strtr($st, array(
+                'ё'=>"yo",    'х'=>"h",  'ц'=>"ts",  'ч'=>"ch", 'ш'=>"sh",
+                'щ'=>"shch",  'ъ'=>'',   'ь'=>'',    'ю'=>"yu", 'я'=>"ya",
+                'Ё'=>"Yo",    'Х'=>"H",  'Ц'=>"Ts",  'Ч'=>"Ch", 'Ш'=>"Sh",
+                'Щ'=>"Shch",  'Ъ'=>'',   'Ь'=>'',    'Ю'=>"Yu", 'Я'=>"Ya",
+            ));
+            return $st;
+        }
+
     // Пути загрузки файлов
         $uploaddir = '../uploads/image/';
     // Массив допустимых значений типа файла
     $types = array('image/gif', 'image/png', 'image/jpeg', 'image/jpg');
     // Максимальный размер файла
-    $size = 102600;
+    $size = 2002600;
 
     // Обработка запроса
         // Проверяем тип файла
         if (!in_array($_FILES[$name]['type'], $types)) {
-            echo 'format';
             return false;
         }
         // Проверяем размер файла
         if ($_FILES[$name]['size'] > $size) {
             return false;
-
         }
-        $uploadfile = $uploaddir . basename(CoreAdmin::translit($_FILES[$name]['name']));
-        echo 'good';
+
+        $uploadfile = $uploaddir . basename(transliterate($_FILES[$name]['name']));
+
         if (move_uploaded_file($_FILES[$name]['tmp_name'], $uploadfile)) {
             echo "Файл корректен и был успешно загружен.\n";
         } else {

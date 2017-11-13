@@ -4,18 +4,20 @@ class ProductAdmin extends CoreAdmin
     public function fetch()
     {
         $products = new Products();
+        $categories = new Categories();
         $request = new Request();
         ////////////////////////////
         $product = new stdClass();
 
         if($request->method() == 'POST') {
 
+            $product->id_category = $request->post('id_category');
             $product->name = $request->post('name');
             $product->description = $request->post('description');
             $product->visible = $request->post('visible','integer');
             $product->brand = $request->post('brand');
             $product->price = $request->pregmatchPrice($request->post('price'));
-            $product->image = CoreAdmin::translit($request->files('image','name'));
+            $product->image = $request->files('image','name');
             $request->uploadImgFile('image');
 
             if(empty($request->post('url'))) {
@@ -33,8 +35,10 @@ class ProductAdmin extends CoreAdmin
             }
 
             $product = $products->getProduct($id);
+
         }
         $array_vars = array(
+            'categories' => $categories->getCategories(),
             'product' => $product,
             'backUp' => "Back",
         );

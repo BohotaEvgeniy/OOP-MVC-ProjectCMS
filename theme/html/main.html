@@ -1,16 +1,23 @@
 {% extends "index.html" %}
 
+{% block navigation %}
 
-{% block content %}
-    <h1>{{ name }}</h1>
+        {% for page in pages %}
 
-    <div id="books">
+        <li><a href="{{ page.url }}" >{{ page.name }}</a></li>
 
-    </div>
+        {% endfor %}
+
 {% endblock %}
 
+{% block catalog %}
 
-{% block sidebar %}
-<h1>Sidebasdasdads334534ar</h1>
+        {% for category in categories %}
+
+                <li>
+                        <a style="color: #fff" href="/catalog/{{ category.name }}">{{ category.name }}</a>
+                </li>
+
+        {% endfor %}
 
 {% endblock %}

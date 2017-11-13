@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+
+
+{% block content %}
+<h1>{{ name_page }}</h1>
+<div class="row">
+    <div class="col-lg-12" style="margin-bottom: 20px">
+        <a class="btn btn-primary" href="/admin/page/"><span class="glyphicon glyphicon-plus"></span> Добавить страницу</a>
+    </div>
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">Name Page</th>
+            </tr>
+            </thead>
+            <tbody>
+        {% for page in pages %}
+        <tr>
+            <td>{{ page.name }}</td>
+        </tr>
+        {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

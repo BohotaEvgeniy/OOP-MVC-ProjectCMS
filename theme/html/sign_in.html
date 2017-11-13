@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+
+{% block sign_in %}
+{{pages}}
+        <form style="text-align: center" method="post">
+                <div class="form-group">
+                        <label for="icon_prefix">Login</label></br>
+                        <input id="icon_prefix" type="text" maxlength="25" name="userLogin" required value="">
+                </div>
+                <div class="form-group">
+                        <label for="icon_email">Email</label></br>
+                        <input id="icon_email" type="email" maxlength="25" name="userEmail" required value="">
+                </div>
+                <div class="form-group">
+                        <label for="icon_pass">Password</label></br>
+                        <input id="icon_pass" type="password" maxlength="25" name="userPassword" required value="">
+                </div>
+                <div class="form-group">
+                        <label for="icon_pass2">Password repeat</label></br>
+                        <input id="icon_pass2" type="password" maxlength="25" name="userPassword2" required value="">
+                </div>
+                <div class="form-group">
+                        <input class="btn btn-primary" type="submit" name="action" value="Регистрация">
+                </div>
+        </form>
+
+{% endblock %}
+
+

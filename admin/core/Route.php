@@ -14,6 +14,8 @@ class Route
             '/admin/product/' => 'ProductAdmin',
             '/admin/categories/' => 'CatalogCategoriesAdmin',
             '/admin/category/' => 'CategoryAdmin',
+            '/admin/pages/' => 'CatalogPagesAdmin',
+            '/admin/page/' => 'PageAdmin',
         );
         if($uri['path']) {
 

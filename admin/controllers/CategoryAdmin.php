@@ -19,7 +19,7 @@ class CategoryAdmin extends CoreAdmin
 
             $category->name = $request->post('name');
             $category->visible = $request->post('visible','integer');
-            $category->image = CoreAdmin::translit($request->files('image','name'));
+            $category->image = $request->files('image','name');
             $request->uploadImgFile('image');
 
 

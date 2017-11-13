@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+
+
+
+{% block catalog %}
+
+    {% for page in pages %}
+
+        <li><a href="{{ page.url }}"></a>{{ page.name }}</li>
+
+    {% endfor %}
+
+{% endblock %}

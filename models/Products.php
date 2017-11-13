@@ -29,14 +29,23 @@ class Products extends Database
         if(empty($id)) {
             return false;
         }
-        $query = "SELECT id,name, brand, description, url, price, visible,image FROM products WHERE id = $id LIMIT 1";
+        $query = "SELECT id,name, brand, description, url, price, visible,image, id_category FROM products WHERE id = $id LIMIT 1";
         $this->query($query);
         return $this->result();
+    }
+    public function getProductCategory($id)
+    {
+        if(empty($id)) {
+            return false;
+        }
+        $query = "SELECT id,name, brand, description, url, price, visible, image FROM products WHERE id_category = $id";
+        $this->query($query);
+        return $this->results();
     }
     public function getProducts()
     {
 
-        $query = "SELECT id,name, brand, description, url, price, visible,image FROM products";
+        $query = "SELECT id,name, brand, description, url, price, visible, image FROM products";
         $this->query($query);
         return $this->results();
     }

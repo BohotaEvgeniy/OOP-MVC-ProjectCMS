@@ -6,19 +6,29 @@ class Route
         $models_dir = 'models/';
         $controllers_dir = 'controllers/';
 
-        $uri = parse_url($_SERVER['REQUEST_URI']);
-
+        $url = parse_url($_SERVER['REQUEST_URI']);
 
         $uri_array = array(
             '/' => 'Main',
-            'catalog' => 'Catalog',
+            '/catalog/' => 'Catalog',
+            '/signin/' => 'SignIn',
+            '/signup/' => 'SignUp',
         );
 
-        if($uri['path']) {
+        if($url['path']) {
 
-            if(file_exists($controllers_dir.$uri_array[$uri['path']] . '.php')) {
-                require $controllers_dir.$uri_array[$uri['path']] . '.php'; //controllers/Main.php
-                $controller = new $uri_array[$uri['path']](); // new Main();
+            if(@file_exists($controllers_dir.$uri_array[$url['path']] . '.php')) {
+                require $controllers_dir.$uri_array[$url['path']] . '.php'; //controllers/Main.php
+                $controller = new $uri_array[$url['path']](); // new Main();
+
+                if(method_exists($controller,'fetch')) {
+                    print $controller->fetch();
+                } else {
+                    Route::error404();
+                }
+           } elseif($url) {
+                require 'controllers/Catalog.php';
+                $controller = new Catalog();
 
                 if(method_exists($controller,'fetch')) {
                     print $controller->fetch();
@@ -26,7 +36,14 @@ class Route
                     Route::error404();
                 }
             } else {
-                Route::error404();
+                require 'controllers/Page.php';
+                $controller = new Page();
+
+                if(method_exists($controller,'fetch')) {
+                    print $controller->fetch();
+                } else {
+                    Route::error404();
+                }
             }
 
         }
